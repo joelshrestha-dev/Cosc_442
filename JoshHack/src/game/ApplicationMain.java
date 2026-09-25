@@ -11,8 +11,8 @@ import java.awt.event.KeyListener;
 public class ApplicationMain extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1060623638149583738L;
 	
-	private AsciiPanel terminal;
-	private Screen screen;
+	private final AsciiPanel terminal;
+	private transient Screen screen;
 	
 	public ApplicationMain(){
 		super();
@@ -20,7 +20,6 @@ public class ApplicationMain extends JFrame implements KeyListener {
 		add(terminal);
 		pack();
 		screen = new StartScreen();
-		addKeyListener(this);
 		repaint();
 	}
 	
@@ -45,6 +44,7 @@ public class ApplicationMain extends JFrame implements KeyListener {
 	
 	public static void main(String[] args) {
 		ApplicationMain app = new ApplicationMain();
+		app.addKeyListener(app);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		app.setVisible(true);
 	}
