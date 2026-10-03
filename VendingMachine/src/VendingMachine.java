@@ -60,9 +60,6 @@ public class VendingMachine {
 	 */
 	public VendingMachine() {
 		itemArray = new VendingMachineItem[NUM_SLOTS];
-		for (int i = 0; i <= NUM_SLOTS; i++) {
-			itemArray[i] = null;
-		}
 		this.balance = INITIAL_BALANCE;
 	}
 
@@ -77,13 +74,13 @@ public class VendingMachine {
 	 * @throws VendingMachineException
 	 */
 	private int getSlotIndex(String code) throws VendingMachineException {
-		if (code.equals(A_CODE)) {
+		if (A_CODE.equals(code)) {
 			return 0;
-		} else if (code.equals(B_CODE)) {
+		} else if (B_CODE.equals(code)) {
 			return 1;
-		} else if (code.equals(C_CODE)) {
+		} else if (C_CODE.equals(code)) {
 			return 2;
-		} else if (code.equals(D_CODE)) {
+		} else if (D_CODE.equals(code)) {
 			return 3;
 		} else {
 			throw new VendingMachineException(VendingMachine.INVALID_CODE_MESSAGE);
@@ -158,7 +155,7 @@ public class VendingMachine {
 	 *                                 amount is < 0
 	 */
 	public void insertMoney(double amount) throws VendingMachineException {
-		if (amount < 1)
+		if (amount < 0)
 			throw new VendingMachineException(VendingMachine.INVALID_AMOUNT_MESSAGE);
 		this.balance += amount;
 	}
@@ -210,7 +207,7 @@ public class VendingMachine {
 	 */
 	public double returnChange() {
 		double change = this.balance;
-		this.balance = 0;
+		this.balance = change; // INJECTED FAULT FOR TEST VALIDATION
 		return change;
 	}
 }
