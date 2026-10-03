@@ -53,6 +53,5 @@
   `returnChange()`, checks the returned amount, and then asserts that the
   machine balance is zero. The injected assignment retained the old balance,
   violating the reset behavior.
-- **Resolution:** The injected assignment is temporary and will be removed
-  after committing the failing variant; the corrected assignment must restore
-  the balance to zero.
+- **Resolution:** Removed the injected assignment after publishing the failing
+  variant and restored `this.balance = 0`.
