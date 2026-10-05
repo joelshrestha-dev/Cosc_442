@@ -14,17 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class InventoryTest {
   private Inventory inventory1;
   private Inventory inventory2;
+  private Inventory inventory_null;
 
   @BeforeEach
   public void setUp() {
     inventory1 = new Inventory(5);
     inventory2 = new Inventory(10);
+    inventory_null = new Inventory(0);
   }
 
   @AfterEach
   public void tearDown() {
     inventory1 = null;
     inventory2 = null;
+    inventory_null = null;
   }
 
   @Test
@@ -92,6 +95,27 @@ public class InventoryTest {
 
   @Test
   public void testIsFull() {
+    assertFalse(inventory1.isFull());
+    assertFalse(inventory2.isFull());
+
+    Item item1 = new Item((char) 1, Color.magenta, "Item1", "sharp");
+    Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
+
+    inventory1.add(item1);
+    inventory1.add(item2);
+
+    assertFalse(inventory1.isFull());
+    assertFalse(inventory2.isFull());
+
+    inventory1.add(new Item((char) 2, Color.green, "Item3", "sharp"));
+    inventory1.add(new Item((char) 3, Color.red, "Item4", "sharp"));
+    inventory1.add(new Item((char) 4, Color.yellow, "Item5", "sharp"));
+
+    assertTrue(inventory1.isFull());
+
+    assertFalse(inventory2.isFull());
+
+    assertTrue(inventory_null.isFull());
 
   }
 
