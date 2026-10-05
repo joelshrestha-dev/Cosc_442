@@ -69,7 +69,25 @@ public class InventoryTest {
 
   @Test
   public void testGetItems() {
+    Item item1 = new Item((char) 1, Color.magenta, "Item1", "sharp");
+    Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
+    inventory1.add(item1);
+    inventory1.add(item2);
 
+    assertTrue(inventory1.getItems()[0].equals(item1));
+    assertTrue(inventory1.getItems()[1].equals(item2));
+
+
+    try{
+      assertFalse(inventory2.getItems()[0].equals(item1));
+    } catch (Exception e) {
+      assertFalse(false);
+    }
+    
+
+    assertTrue(inventory1.getItems().length == 5);
+
+    assertTrue(inventory1.getItems()[4] == null);
   }
 
   @Test
