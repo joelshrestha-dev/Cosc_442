@@ -15,12 +15,23 @@ public class InventoryTest {
   private Inventory inventory1;
   private Inventory inventory2;
   private Inventory inventory_null;
+  private Inventory inventory_full;
+  private Item item_a;
+  private Item item_b;
 
   @BeforeEach
   public void setUp() {
     inventory1 = new Inventory(5);
     inventory2 = new Inventory(10);
+
     inventory_null = new Inventory(0);
+
+    inventory_full = new Inventory(2);
+
+    item_a = (new Item((char) 1, Color.magenta, "Item1", "sharp"));
+    item_b = new Item((char) 0, Color.blue, "Item2", "dull");
+    inventory_full.add(item_a);
+    inventory_full.add(item_b);
   }
 
   @AfterEach
@@ -28,6 +39,7 @@ public class InventoryTest {
     inventory1 = null;
     inventory2 = null;
     inventory_null = null;
+    inventory_full = null;
   }
 
   @Test
@@ -107,13 +119,7 @@ public class InventoryTest {
     assertFalse(inventory1.isFull());
     assertFalse(inventory2.isFull());
 
-    inventory1.add(new Item((char) 2, Color.green, "Item3", "sharp"));
-    inventory1.add(new Item((char) 3, Color.red, "Item4", "sharp"));
-    inventory1.add(new Item((char) 4, Color.yellow, "Item5", "sharp"));
-
-    assertTrue(inventory1.isFull());
-
-    assertFalse(inventory2.isFull());
+    assertTrue(inventory_full.isFull());
 
     assertTrue(inventory_null.isFull());
 
@@ -121,6 +127,27 @@ public class InventoryTest {
 
   @Test
   public void testRemove() {
+    Item item1 = new Item((char) 1, Color.magenta, "Item1", "sharp");
+    Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
+    inventory1.add(item1);
+    inventory1.add(item2);
+    inventory2.add(item1);
+
+    inventory1.remove(item1);
+    
+    assertFalse(inventory1.contains(item1));
+    assertTrue(inventory1.contains(item2));
+
+    inventory2.remove(item1);
+    assertFalse(inventory2.contains(item1));
+
+    assertTrue(inventory_full.isFull());
+    inventory_full.remove(item_a);
+
+    assertFalse(inventory_full.isFull());
+
+    inventory_full.add(item_a);
+    assertTrue(inventory_full.isFull());
 
   }
 }
