@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class InventoryTest {
   private Inventory inventory1;
@@ -32,13 +32,22 @@ public class InventoryTest {
     Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
     inventory1.add(item1);
     inventory2.add(item2);
-    assertTrue(inventory1.contains(item1));
-    assertTrue(inventory2.contains(item2));
+    assertTrue(inventory1.get(0).equals(item1));
+    assertTrue(inventory2.get(0).equals(item2));
 
   }
 
   @Test
   public void testContains() {
+    Item item1 = new Item((char) 1, Color.magenta, "Item1", "sharp");
+    Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
+    inventory1.add(item1);
+    inventory2.add(item2);
+    assertTrue(inventory1.contains(item1));
+    assertTrue(inventory2.contains(item2));
+
+    assertFalse(inventory1.contains(item2));
+    assertFalse(inventory2.contains(item1));
 
   }
 
