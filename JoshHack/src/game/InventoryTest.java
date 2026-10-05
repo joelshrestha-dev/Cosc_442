@@ -7,7 +7,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InventoryTest {
   private Inventory inventory1;
@@ -53,6 +55,15 @@ public class InventoryTest {
 
   @Test
   public void testGet() {
+
+    Item item1 = new Item((char) 1, Color.magenta, "Item1", "sharp");
+    Item item2 = new Item((char) 0, Color.blue, "Item2", "dull");
+    inventory1.add(item1);
+    inventory1.add(item2);
+    assertTrue(inventory1.get(0).equals(item1));
+    assertTrue(inventory1.get(1).equals(item2));
+
+    assertThrows(IndexOutOfBoundsException.class, () -> inventory1.get(5));
 
   }
 
