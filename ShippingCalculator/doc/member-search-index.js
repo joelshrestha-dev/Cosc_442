@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"<Unnamed>","c":"ShippingCalculator","l":"calculateCost(double, int, boolean)","u":"calculateCost(double,int,boolean)"},{"p":"<Unnamed>","c":"ShippingCalculator","l":"ShippingCalculator()","u":"%3Cinit%3E()"}];updateSearchResults();
